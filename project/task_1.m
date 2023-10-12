@@ -6,9 +6,10 @@
 % szybkość reakcji A, B i C dla podanych warunków.
 clc
 clear
-
+% A + B -> C
 C_A0 = 0.1; %mol/dm3
 C_B0 = 0.02; %mol/dm3
+C_C0 = 0;
 % reaktor CSTR
 %pojemność V i szybkość podawania v
 V = 5; %dm3
@@ -21,15 +22,16 @@ C_Cout = 0.04; %mol/dm3
 
 tau_A = V/v_A0;
 tau_B = V/v_B0;
+tau = V/(v_A0 + v_B0);
 
 X_A = (C_A0 - C_Aout)/C_A0;
-r_A = C_A0 * X_A/tau_A;
+r_A =- (C_A0 * X_A)/tau_A;
 %tau = V/v = C_A0 * X/r
 fprintf("Wynik r_A = %.2d \n", r_A);
 
 X_B = (C_B0 - C_Bout)/C_B0;
-r_B = C_B0 *X_B/tau_B;
+r_B = -(C_B0 *X_B)/tau_B;
 fprintf("Wynik r_B = %.2d \n", r_B);
 
-r_C = -(-r_A - r_B);
+r_C = (C_C0 - C_Cout) / tau;
 fprintf("Wynik r_C = %.2d \n", r_C);
