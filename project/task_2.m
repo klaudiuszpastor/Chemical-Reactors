@@ -11,9 +11,10 @@
 %reaktorze w niedomiarze.
 clear; clc;
 
+
 V = 10; %dm3
-C_A0 = 2; %mol/dm3
-C_B0 = 2.6; %mol/dm3
+C_A0 = 2*(2/3); %mol/dm3
+C_B0 = 2.6*(1/3); %mol/dm3
 C_R0 = 0;
 
 epsilon = 0; %nie dochodzi do zmiany gęstości
@@ -24,11 +25,13 @@ X_A = 0.6;
 delta = C_A0*X_A;
 C_A = C_A0 - delta;
 C_B = C_B0 - delta/2;
-C_R = C_B0 - C_B;
+C_R = (C_A0*X_A)/2;
 
-r_A = -2*(15*C_A^2 * C_B - 0.5*C_R);
-v_A = (V*r_A)/(C_A0 - C_A);
-v_B = v_A/2;
-
-fprintf("Przepływ strumienia składnika A wynosi %0.1f dm3/m\n",v_A);
-fprintf("Przepływ strumienia składnika B wynosi %0.1f dm3/min\n",v_B);
+r_A = -2*((15*C_A^2 * C_B )- (0.5*C_R));
+v = (V*r_A)/(C_A0 - C_A);
+v_A = v*(2/3);
+v_B = v*(1/3);
+fprintf("Przepływ strumienia całkowitego wynosi: %0.2f [dm3/min]\n",-v);
+fprintf("Przepływ strumienia składnika A wynosi %0.2f [dm3/min]\n",-v_A);
+fprintf("Przepływ strumienia składnika B wynosi %0.2f [dm3/min]\n\n",-v_B);
+fprintf("Przepływ strumieni w [dm3/s]:\n -strumienia całkowitego: %0.2f\n -strumienia A: %0.2f\n -strumienia B: %0.2f\n",-v/60,-v_A/60,-v_B/60);
