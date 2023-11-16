@@ -177,8 +177,11 @@ plot(X, Fa_ra,'g','LineWidth',2);
 hold on
 xlabel("Stopień przereagowania, X");
 ylabel("F_A/r_A");
-title("CSTR (V=2.778 m3)")
 grid on
+rectangle('Position',[x_r3,1.5,X(5)-x_r3,Fa_ra(5)-1.5],'LineWidth',2,'EdgeColor',[0.4 0.4 0.4]);
+rectangle('Position',[x_r3,1.5,x_r4-x_r3,y3-1.5],'LineWidth',2,'EdgeColor',[0.4 0.4 0.4]);
+plot([x_r2,x_r3,x_r4],[y1,y2,y3],'*')
+xline([x_r2,x_r3])
 xlim([0,0.75])
 hold off
 
